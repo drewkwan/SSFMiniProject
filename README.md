@@ -52,5 +52,4 @@ Sample Json Data
                 ],
                 "image": "https://spoonacular.com/cdn/ingredients_100x100/apple.jpg"
             },
-
 ```
