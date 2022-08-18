@@ -10,8 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import vttp.ssf.miniproject.ssfminiproject.model.Query;
 import vttp.ssf.miniproject.ssfminiproject.model.Recipe;
 import vttp.ssf.miniproject.ssfminiproject.service.RecipeService;
 
@@ -25,10 +26,9 @@ public class IndexPageController {
 
     @GetMapping("/")
     public String getHome(Model model) {
-        Query query = new Query();
-        model.addAttribute("query", query);
         Recipe recipe = new Recipe();
         recipeList(model);
+        model.addAttribute("recipe", recipe);
         return "index";
     }
 
@@ -38,8 +38,12 @@ public class IndexPageController {
     }
 
     @GetMapping("/recipes")
-    public String showRecipes(Model model) {
+    public String showRecipes(@RequestParam(required = true) String ingredients, @RequestParam(required=true) int recipeNumber, Model model) {
         Recipe recipe = new Recipe();
+        recipe.setIngredients(ingredients);
+        recipe.setRecipeNumber(recipeNumber);
+        logger.info("ingredients ---> " + ingredients);
+        logger.info("recipe number ---> " + recipeNumber);
         logger.info("recipe id >>>>>>>> " + recipe.getId());
         model.addAttribute("recipe", recipe);
         return "showRecipes";

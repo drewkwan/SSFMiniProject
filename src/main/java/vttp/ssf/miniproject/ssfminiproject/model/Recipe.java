@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
-import jakarta.json.JsonNumber;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 import jakarta.json.JsonValue;
@@ -29,7 +28,49 @@ public class Recipe {
     private String unusedIngredients; //also will return a json array of unused ingredients. so far it's empty, lets see if we even need it
     private int usedIngredientCount; 
     private UsedIngredients usedIngredients; //also returns a Json array. Consider making class of this
-    private Query query;
+    
+    //request from the form
+    private String ingredients; //comma separated, need to split number of parameters
+    //I feel like the only required parameter should be the ingredients, and then the number of recipes is optional, but defaulted to like 10(?)
+    private int recipeNumber =10;; //number of recipes being returned. indicated as "number" in Json file
+    
+    
+    private boolean limitLicense;//Whether the recipes should have an open license that allows display with proper attribution. Check in the meaning
+    private int ranking; //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
+    private boolean ignorePantry;	//Whether to ignore typical pantry items, such as water, salt, flour, etc.
+    //consider: creating an ignore pantry
+    
+    public int getRecipeNumber() {
+        return recipeNumber;
+    }
+    public void setRecipeNumber(int recipeNumber) {
+        this.recipeNumber = recipeNumber;
+    }
+    public String getIngredients() {
+        return ingredients;
+    }
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+    
+    public boolean isLimitLicense() {
+        return limitLicense;
+    }
+    public void setLimitLicense(boolean limitLicense) {
+        this.limitLicense = limitLicense;
+    }
+    public int getRanking() {
+        return ranking;
+    }
+    public void setRanking(int ranking) {
+        this.ranking = ranking;
+    }
+    public boolean isIgnorePantry() {
+        return ignorePantry;
+    }
+    public void setIgnorePantry(boolean ignorePantry) {
+        this.ignorePantry = ignorePantry;
+    }
 
     public MissedIngredients getMissedIngredients() {
         return missedIngredients;
@@ -93,13 +134,7 @@ public class Recipe {
         this.usedIngredientCount = usedIngredientCount;
     }
 
-    public Query getQuery() {
-        return query;
-    }
-    public void setQuery(Query query) {
-        this.query = query;
-    }
-
+    
     public static ArrayList<Recipe> lsOfRecipes(String json) {
         //returns id:, title, image(url), imagetype, usedingrediencount, missedingredientcount, missedingredients[{stuff}]
         //JsonArray jsonDataArray = new JsonArray(json);          

@@ -12,10 +12,14 @@
     action="#"
     th:action="@{/recipes}"}
     method="get"
-    th:object="${query}"
+    th:object="${recipe}"
     >
     <label>Ingredients: </label>
     <input type="text" th:field="*{ingredients}" placeholder="onions">
+    <br>
+    <br>
+    <label>Number of recipes: </label>
+    <input type="number" th:field="*{recipeNumber}" min="1">
     <br>
     <br>
     <button type="submit">Get recipes!</button>

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import vttp.ssf.miniproject.ssfminiproject.model.Query;
 import vttp.ssf.miniproject.ssfminiproject.model.Recipe;
 
 @Service
@@ -23,7 +22,7 @@ public class RecipeService {
     //apiKey = input later;
     
     public ArrayList<Recipe> getRecipes() {
-        //String apiKey = "";
+        //String apiKey = "???";
         // String recipeListUrl = UriComponentsBuilder.fromUriString(RECIPE_LS_URL)
         //                     .queryParam("ingredients", q.getIngredients())
         //                     .queryParam("number", q.getRecipeNumber())
