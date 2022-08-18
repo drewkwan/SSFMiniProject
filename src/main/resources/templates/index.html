@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get your recipe here!</title>
+</head>
+<body>
+    <h1>Get your recipe here!</h1>
+    <form
+    action="#"
+    th:action="@{/recipes}"}
+    method="get"
+    th:object="${query}"
+    >
+    <label>Ingredients: </label>
+    <input type="text" th:field="*{ingredients}" placeholder="onions">
+    <br>
+    <br>
+    <button type="submit">Get recipes!</button>
+    </form>
+    
+    
+</body>
+</html>
