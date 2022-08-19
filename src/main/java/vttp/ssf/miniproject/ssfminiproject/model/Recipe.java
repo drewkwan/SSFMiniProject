@@ -32,14 +32,21 @@ public class Recipe {
     //request from the form
     private String ingredients; //comma separated, need to split number of parameters
     //I feel like the only required parameter should be the ingredients, and then the number of recipes is optional, but defaulted to like 10(?)
-    private int recipeNumber =10;; //number of recipes being returned. indicated as "number" in Json file
+    private int recipeNumber; //number of recipes being returned. indicated as "number" in Json file
     
     
     private boolean limitLicense;//Whether the recipes should have an open license that allows display with proper attribution. Check in the meaning
     private int ranking; //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
     private boolean ignorePantry;	//Whether to ignore typical pantry items, such as water, salt, flour, etc.
     //consider: creating an ignore pantry
+    private ArrayList<Recipe> listOfRecipes = new ArrayList<>();
     
+    public ArrayList<Recipe> getListOfRecipes() {
+        return listOfRecipes;
+    }
+    public void setListOfRecipes(ArrayList<Recipe> listOfRecipes) {
+        this.listOfRecipes = listOfRecipes;
+    }
     public int getRecipeNumber() {
         return recipeNumber;
     }
@@ -138,13 +145,14 @@ public class Recipe {
     public static ArrayList<Recipe> lsOfRecipes(String json) {
         //returns id:, title, image(url), imagetype, usedingrediencount, missedingredientcount, missedingredients[{stuff}]
         //JsonArray jsonDataArray = new JsonArray(json);          
-        logger.info("create Json " + json);
+        //logger.info("create Json " + json);
         //JsonArray recipeArray = new JsonArray(json);
         
         Recipe recipe = new Recipe();
         InputStream is = new ByteArrayInputStream(json.getBytes());
         try(JsonReader r = Json.createReader(is)) {
             JsonArray dataArray = r.readArray();
+            logger.info("Json data >>>>>>" + dataArray);
             ArrayList<Recipe> recipeList =new ArrayList<>();
             for (JsonValue dataValue:dataArray) {
                 JsonObject o = dataValue.asJsonObject();
@@ -173,15 +181,16 @@ public class Recipe {
 
 
                 recipeList.add(recipe);
-                logger.info("the recipe list !!>>> " + recipeList.get(0).toString());
+                logger.info("the recipe list !!>>> " + recipeList.size());
+                //recipe list is storing correctly
                 logger.info(recipe.getTitle().toString()); //foresee problems
 
                 logger.info(recipe.toString()); //this is class will not log right
 
 
             }
-
-            return recipeList;
+            recipe.setListOfRecipes(recipeList);
+            return recipe.listOfRecipes;
 
         }
 

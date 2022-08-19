@@ -27,13 +27,13 @@ public class IndexPageController {
     @GetMapping("/")
     public String getHome(Model model) {
         Recipe recipe = new Recipe();
-        recipeList(model);
         model.addAttribute("recipe", recipe);
         return "index";
     }
 
     private void recipeList(Model model) {
-        ArrayList<Recipe> lsOfRecipes = recipeSvc.getRecipes();
+        Recipe r = new Recipe();
+        ArrayList<Recipe> lsOfRecipes = recipeSvc.getRecipes(r);
         model.addAttribute("recipeList", lsOfRecipes);
     }
 
@@ -42,10 +42,14 @@ public class IndexPageController {
         Recipe recipe = new Recipe();
         recipe.setIngredients(ingredients);
         recipe.setRecipeNumber(recipeNumber);
-        logger.info("ingredients ---> " + ingredients);
-        logger.info("recipe number ---> " + recipeNumber);
+        logger.info("ingredients ---> " + recipe.getIngredients());
+        logger.info("recipe number ---> " + recipe.getRecipeNumber());
         logger.info("recipe id >>>>>>>> " + recipe.getId());
+        recipeList(model);
         model.addAttribute("recipe", recipe);
+        model.addAttribute("ingredients", recipe.getIngredients());
+        model.addAttribute("number", recipe.getRecipeNumber());
+        model.addAttribute("recipeList", recipe); 
         return "showRecipes";
     }
     

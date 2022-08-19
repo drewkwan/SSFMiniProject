@@ -8,7 +8,30 @@
 </head>
 <body>
     <h1>Here are your recipes</h1>
+    <form 
+    action="#"
+    th:action="@{/recipes}"
+    th:object="${recipe}"
+    method="post"
+    >
     <!-- <tr th:each="recipe:${recipes}"></tr> -->
-    
+    <div th:each = "recipe:${recipeList}">
+        <li th:value ="${recipe.getId()}"></li>
+        <input type="checkbox">
+    </div>
+        <ol>
+            <div th:each = "recipe:${recipeList}"> 
+                <li>
+                    <p>Id: <span th:text="${recipe.getId()}"></span></p>
+                    <p>Published On: <span th:text="${recipe.getTitle()}"></span></p>
+                    <p><img th:src="@{${recipe.getImageUrl()}}" width="200" height="200 "></p>
+                    <p>Used ingredients: <span th:text="${recipe.getUsedIngredientCount()}"></span></p>
+                    <p>Likes: <span th:text="${recipe.getLikes()}"></span></p>
+                    <p>usedIngredients: <span th:text="${recipe.getUsedIngredients()}"></span></p>
+                    <input type="checkbox" name="recipe" th:checked="${toSave}"/><label for="article">Save</label>    
+                </li>
+            </div>   
+        </ol>
+    </tr>
 </body>
 </html>

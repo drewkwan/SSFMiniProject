@@ -21,14 +21,14 @@ public class RecipeService {
     public static final String RECIPE_LS_URL = "https://api.spoonacular.com/recipes/findByIngredients"; //spoonacular api
     //apiKey = input later;
     
-    public ArrayList<Recipe> getRecipes() {
-        //String apiKey = "???";
-        // String recipeListUrl = UriComponentsBuilder.fromUriString(RECIPE_LS_URL)
-        //                     .queryParam("ingredients", q.getIngredients())
-        //                     .queryParam("number", q.getRecipeNumber())
-        //                     .queryParam("apiKey", apiKey)
-        //                     .toUriString();
-        String recipeListUrl = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2&apiKey=???";
+    public ArrayList<Recipe> getRecipes(Recipe recipe) {
+        String apiKey = "***";
+         String recipeListUrl = UriComponentsBuilder.fromUriString(RECIPE_LS_URL)
+                             .queryParam("ingredients", recipe.getIngredients())
+                             .queryParam("number", recipe.getRecipeNumber())
+                             .queryParam("apiKey", apiKey)
+                             .toUriString();
+        //String recipeListUrl = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2&apiKey=***";
 
         logger.info("Recipe URI >>> " + recipeListUrl);
         RestTemplate template = new RestTemplate();
