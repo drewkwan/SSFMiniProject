@@ -23,11 +23,11 @@ public class Recipe {
     private String imageType; //jpg, png etc.
     private int likes; //dunno if need tbh. maybe cna set a popularity rank for the display? 
     private int missedIngredientCount; 
-    private MissedIngredients missedIngredients;//this returns a whole new set of stuff in itself. make a missed ingredients cpint?
+    private ArrayList<MissedIngredients> missedIngredientsList;//this returns a whole new set of stuff in itself. make a missed ingredients cpint?
     private String title; //presents the recipe name
     private String unusedIngredients; //also will return a json array of unused ingredients. so far it's empty, lets see if we even need it
     private int usedIngredientCount; 
-    private UsedIngredients usedIngredients; //also returns a Json array. Consider making class of this
+    private ArrayList<UsedIngredients> usedIngredientsList; //also returns a Json array. Consider making class of this
     
     //request from the form
     private String ingredients; //comma separated, need to split number of parameters
@@ -39,13 +39,27 @@ public class Recipe {
     private int ranking; //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
     private boolean ignorePantry;	//Whether to ignore typical pantry items, such as water, salt, flour, etc.
     //consider: creating an ignore pantry
-    private ArrayList<Recipe> listOfRecipes = new ArrayList<>();
+    // private ArrayList<Recipe> listOfRecipes = new ArrayList<>();
     
-    public ArrayList<Recipe> getListOfRecipes() {
-        return listOfRecipes;
+    
+    //}
+    // public ArrayList<Recipe> getListOfRecipes() {
+    //     return listOfRecipes;
+    // }
+    // public void setListOfRecipes(ArrayList<Recipe> listOfRecipes) {
+    //     this.listOfRecipes = listOfRecipes;
+    // }
+    public ArrayList<MissedIngredients> getMissedIngredientsList() {
+        return missedIngredientsList;
     }
-    public void setListOfRecipes(ArrayList<Recipe> listOfRecipes) {
-        this.listOfRecipes = listOfRecipes;
+    public void setMissedIngredientsList(ArrayList<MissedIngredients> missedIngredientsList) {
+        this.missedIngredientsList = missedIngredientsList;
+    }
+    public ArrayList<UsedIngredients> getUsedIngredientsList() {
+        return usedIngredientsList;
+    }
+    public void setUsedIngredientsList(ArrayList<UsedIngredients> usedIngredientsList) {
+        this.usedIngredientsList = usedIngredientsList;
     }
     public int getRecipeNumber() {
         return recipeNumber;
@@ -79,18 +93,18 @@ public class Recipe {
         this.ignorePantry = ignorePantry;
     }
 
-    public MissedIngredients getMissedIngredients() {
-        return missedIngredients;
-    }
-    public void setMissedIngredients(MissedIngredients missedIngredients) {
-        this.missedIngredients = missedIngredients;
-    }
-    public UsedIngredients getUsedIngredients() {
-        return usedIngredients;
-    }
-    public void setUsedIngredients(UsedIngredients usedIngredients) {
-        this.usedIngredients = usedIngredients;
-    }
+    // public MissedIngredients getMissedIngredients() {
+    //     return missedIngredients;
+    // }
+    // public void setMissedIngredients(MissedIngredients missedIngredients) {
+    //     this.missedIngredients = missedIngredients;
+    // }
+    // public UsedIngredients getUsedIngredients() {
+    //     return usedIngredients;
+    // }
+    // public void setUsedIngredients(UsedIngredients usedIngredients) {
+    //     this.usedIngredients = usedIngredients;
+    //}
     public int getId() {
         return id;
     }
@@ -148,7 +162,7 @@ public class Recipe {
         //logger.info("create Json " + json);
         //JsonArray recipeArray = new JsonArray(json);
         
-        Recipe recipe = new Recipe();
+       
         InputStream is = new ByteArrayInputStream(json.getBytes());
         try(JsonReader r = Json.createReader(is)) {
             JsonArray dataArray = r.readArray();
@@ -157,6 +171,9 @@ public class Recipe {
             for (JsonValue dataValue:dataArray) {
                 JsonObject o = dataValue.asJsonObject();
                 
+                System.out.println("recipe ID>>>>>>>>> " + o.getInt("id"));
+                //Instantiate the new recipe class inside the loop so that you create a new recipe every time
+                Recipe recipe = new Recipe();
                 recipe.setTitle(o.getString("title"));
                 recipe.setId(o.getInt("id"));
                 recipe.setImageUrl(o.getString("image"));
@@ -165,18 +182,22 @@ public class Recipe {
                 recipe.setLikes(o.getInt("likes"));;
                 recipe.setMissedIngredientCount(o.getInt("missedIngredientCount"));
                 
-                JsonArray jsonArr = o.getJsonArray("missedIngredients");
-                for (JsonValue value:jsonArr) {
+                JsonArray jsonMissedIngArr = o.getJsonArray("missedIngredients");
+                ArrayList<MissedIngredients> missedIngredientsList = new ArrayList<>();
+                for (JsonValue value:jsonMissedIngArr) {
                     JsonObject missedIngObject = value.asJsonObject();
                     MissedIngredients missedIngredients = MissedIngredients.createMissedIngredients(missedIngObject);
-                    recipe.setMissedIngredients(missedIngredients);
+                    missedIngredientsList.add(missedIngredients);
+                    recipe.setMissedIngredientsList(missedIngredientsList);
                 }
 
                 JsonArray jsonUsedIngArr = o.getJsonArray("usedIngredients");
+                ArrayList<UsedIngredients> usedIngredientsList = new ArrayList<>();
                 for (JsonValue value:jsonUsedIngArr) {
                     JsonObject usedIngObject = value.asJsonObject();
                     UsedIngredients usedIngredients = UsedIngredients.createUsedIngredients(usedIngObject);
-                    recipe.setUsedIngredients(usedIngredients);
+                    usedIngredientsList.add(usedIngredients);
+                    recipe.setUsedIngredientsList(usedIngredientsList);
                 }
 
 
@@ -189,8 +210,7 @@ public class Recipe {
 
 
             }
-            recipe.setListOfRecipes(recipeList);
-            return recipe.listOfRecipes;
+            return recipeList;
 
         }
 
