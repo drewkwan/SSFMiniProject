@@ -172,7 +172,7 @@ public class Recipe {
                 JsonObject o = dataValue.asJsonObject();
                 
                 System.out.println("recipe ID>>>>>>>>> " + o.getInt("id"));
-                //Instantiate the new recipe class inside the loop so that you create a new recipe every time
+                //Instantiate the new recipe class inside the loop so that you create a new recipe everytime
                 Recipe recipe = new Recipe();
                 recipe.setTitle(o.getString("title"));
                 recipe.setId(o.getInt("id"));

@@ -28,14 +28,14 @@ public class IndexPageController {
     public String getHome(Model model) {
         Recipe recipe = new Recipe();
         model.addAttribute("recipe", recipe);
-        return "login";
+        return "index";
     }
 
     @GetMapping("/search")
     public String getSearchDirect(Model model) {
         Recipe recipe = new Recipe();
         model.addAttribute("recipe", recipe);
-        return "search";
+        return "searchRecipes";
     }
     //I should remove this once I'm able to process the login.
 
@@ -43,7 +43,7 @@ public class IndexPageController {
     public String getSearch(Model model) {
         Recipe recipe = new Recipe();
         model.addAttribute("recipe", recipe);
-        return "search";
+        return "searchRecipes";
     }
 
     private void recipeList(Model model, Recipe r) {

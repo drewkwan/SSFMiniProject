@@ -34,7 +34,7 @@ public class RecipeService {
                              .queryParam("number", recipe.getRecipeNumber())
                              .queryParam("apiKey", apiKey)
                              .toUriString();
-        //String recipeListUrl = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2&apiKey=70bb981363e4453aa65e92b0750ab864";
+        //String recipeListUrl = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2&apiKey=";
 
         logger.info("Recipe URI >>> " + recipeListUrl);
         RestTemplate template = new RestTemplate();
@@ -54,10 +54,10 @@ public class RecipeService {
 
     public ArrayList<RecipeInstructions> getRecipeInstructions(Recipe recipe) {
         String apiKey = "";
-        String RECIPE_INSTRUCTIONS_URI = "https://api.spoonacular.com/recipes/" + recipe.getId() + "/analyzedInstructions"; //do i need to query param this?
+        String RECIPE_INSTRUCTIONS_URI = "https://api.spoonacular.com/recipes/" + recipe.getId() + "/analyzedInstructions"; //do i need to query param this? --> Not required 
         //String RECIPE_INSTRUCTIONS_URI = "https://api.spoonacular.com/recipes/11282/analyzedInstructions";
         System.out.println("test");
-        logger.info("rest getId ::::::::::: " + recipe.getId());
+        logger.info("test ::::::::::: " + recipe.getId());
         String getRecipeUrl = UriComponentsBuilder.fromUriString(RECIPE_INSTRUCTIONS_URI).queryParam("apiKey", apiKey).toUriString();       
         logger.info("Recipe URI >>>>>>>> " + getRecipeUrl);
         RestTemplate template = new RestTemplate();
