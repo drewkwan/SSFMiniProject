@@ -9,20 +9,19 @@
 <body>
     <!--The recipe.getId not wroking. Why.-->
     <h1>Here are your recipes</h1>
-        
-        <form 
-        action="#"
-        th:action="@{/recipes/instructions/(id=${recipe.id})}" 
-        method="post"
-        >
 
-            <div th:each = "recipe, iterator:${recipeList}">                
+            <div th:each = "recipe:${recipeList}">  
+
+            <form 
+            action="#"
+            th:action="@{/recipes/instructions/(id=${recipe.id})}" 
+            method="get"
+            >
+
+                          
                 <table>
                     <tr>Id: <span th:text="${recipe.getId()}"></span></tr>
                     <input type="hidden" name="idx" th:value="${recipe.id}">
-                    <br>
-                    <tr>Iterator index: <span th:text="${iterator.index}"></span></tr>
-                    <input type="hidden" name="index" th:value="${iterator.index}">
                     <br>
                     <tr>Recipe Name: <span th:text="${recipe.getTitle()}"></span></tr>
                     <br>
@@ -55,11 +54,12 @@
                     <!-- <input type="checkbox" name="recipe" th:checked="${toSave}"/><label for="article">Save</label> -->
                     <!-- <input type="hidden" th:field="${recipe.getId()}" /> -->
                     <!-- <input type="submit" name="recipe${recipeList.index}" value="View this recipe"/>   -->
-                    <button type="submit" name="recipeId" th:value="${recipe.id}">View this recipe</button>     
+                    <button type="submit">View this recipe</button>     
 
                 </li>
-            </div>   
-        </ol>
-    </form>
+   
+            </ol>
+        </form>
+    </div>
 </body>
 </html>

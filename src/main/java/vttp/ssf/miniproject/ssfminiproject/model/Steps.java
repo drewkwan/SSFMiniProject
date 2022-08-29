@@ -29,7 +29,7 @@ public class Steps {
     public static Steps createSteps(JsonObject stepsObj) {
         Steps steps = new Steps();
         steps.setNumber(stepsObj.getInt("number"));
-        steps.setStep(stepsObj.getString("stpe"));
+        steps.setStep(stepsObj.getString("step"));
         
         return steps;
     }

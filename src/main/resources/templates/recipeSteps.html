@@ -8,5 +8,12 @@
 </head>
 <body>
     <h1>here are your instructions</h1>
+    <table>
+        <tr>Here are your Steps</tr>
+        <br>
+        <div th:each="{steps: recipeInstructions.getLsOfSteps()}"></div>
+            <tr>Steps: <span th:text =${steps.getStep()}></span></tr>
+    </table>
+</div>
 </body>
 </html>

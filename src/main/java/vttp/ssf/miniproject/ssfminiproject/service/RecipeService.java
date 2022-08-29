@@ -1,13 +1,9 @@
 package vttp.ssf.miniproject.ssfminiproject.service;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -54,7 +50,7 @@ public class RecipeService {
 
     public ArrayList<RecipeInstructions> getRecipeInstructions(Recipe recipe) {
         String apiKey = "";
-        String RECIPE_INSTRUCTIONS_URI = "https://api.spoonacular.com/recipes/" + recipe.getId() + "/analyzedInstructions"; //do i need to query param this? --> Not required 
+        String RECIPE_INSTRUCTIONS_URI = "https://api.spoonacular.com/recipes/" + recipe.getId() + "/analyzedInstructions"; //do i need to query param this? --> Not required
         //String RECIPE_INSTRUCTIONS_URI = "https://api.spoonacular.com/recipes/11282/analyzedInstructions";
         System.out.println("test");
         logger.info("test ::::::::::: " + recipe.getId());

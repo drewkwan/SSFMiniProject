@@ -1,7 +1,5 @@
 package vttp.ssf.miniproject.ssfminiproject.model;
 
-import java.math.BigDecimal;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
