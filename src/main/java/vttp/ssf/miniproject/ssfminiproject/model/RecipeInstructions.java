@@ -46,7 +46,7 @@ public class RecipeInstructions {
                 JsonObject instructionsObject = instructionsValue.asJsonObject();
                 RecipeInstructions recipeInstructions = new RecipeInstructions();
                 recipeInstructions.setName(instructionsObject.getString("name"));
-                logger.info("WhATDDDDDDDD >>" + recipeInstructions.name);
+                logger.info("Name of instruction >>" + recipeInstructions.name);
                 
                 JsonArray jsonAllSteps = instructionsObject.getJsonArray("steps");
                 ArrayList<Steps> lsOfSteps = new ArrayList<>();

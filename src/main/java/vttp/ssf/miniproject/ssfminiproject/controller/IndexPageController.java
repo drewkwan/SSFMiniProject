@@ -74,6 +74,7 @@ public class IndexPageController {
         model.addAttribute("number", recipe.getRecipeNumber());
         // model.addAttribute("recipeList", recipe); 
         return "showRecipes";
+        //return "showRecipes";
     }
     //if theres no more data it will throw error, but if there is empty data, no error is thrown. 
 

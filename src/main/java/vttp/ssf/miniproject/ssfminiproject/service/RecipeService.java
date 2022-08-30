@@ -58,8 +58,8 @@ public class RecipeService {
         logger.info("Recipe URI >>>>>>>> " + getRecipeUrl);
         RestTemplate template = new RestTemplate();
         ResponseEntity<String> resp = template.getForEntity(getRecipeUrl, String.class);
-        ArrayList<RecipeInstructions> recipeInstructions = RecipeInstructions.createLsOfInstructions(resp.getBody());
-        return recipeInstructions;
+        ArrayList<RecipeInstructions> recipeInstructionsList = RecipeInstructions.createLsOfInstructions(resp.getBody());
+        return recipeInstructionsList;
 
 
 

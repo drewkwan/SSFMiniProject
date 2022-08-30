@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Restaurantly Bootstrap Template - Index</title>
+  <title>Cooking Daddy</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -35,29 +35,24 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-<!--Top Bar portion-->
+
 <body>
     <div id="topbar" class="d-flex align-items-center fixed-top">
         <div class="container d-flex justify-content-center justify-content-md-between">
     
           <div class="contact-info d-flex align-items-center">
             <i class="bi bi-phone d-flex align-items-center"><span>+65 8268 2022</span></i>
-            <i class="bi bi-clock d-flex align-items-center ms-4"><span> Al day all night cooking daddy</span></i>
+            <i class="bi bi-clock d-flex align-items-center ms-4"><span> All day all night cooking daddy</span></i>
           </div>
     
         </div>
       </div>
-<!--Top bar end-->
-
-<!--Search Results-->
-
+      
         <section class="menu section-bg">
-            
-        <div class="section-title">
-        
+
+        <h1>Here are your recipes</h1>
         <div class="container">
         <div class="section-title">
-            <h1>Here are your recipes</h1>
             <h2>Search results</h2>
             <p>Check Out These Recipes!</p>
         </div>
@@ -69,11 +64,50 @@
             th:action="@{/recipes/instructions/(id=${recipe.id})}" 
             method="get"
             >
+           
+                <table>
+                    <tr>Id: <span th:text="${recipe.getId()}"></span></tr>
+                    <input type="hidden" name="id" th:value="${recipe.id}">
+                    <br>
+                    <tr>Recipe Name: <span th:text="${recipe.getTitle()}"></span></tr>
+                    <br>
+                    <tr><img th:src="@{${recipe.getImageUrl()}}" width="200" height="200 "></tr>
+                    <br>
+                    <tr>Used ingredients: <span th:text="${recipe.getUsedIngredientCount()}"></span></tr>
+                    <br>
+                    <tr>Likes: <span th:text="${recipe.getLikes()}"></span></tr>
+                    <br>
+                    <div th:each = "usedIngredients:${recipe.getUsedIngredientsList()}">
+                            <!-- <p> Used Ingredient ID: <span th:text="${usedIngredients.getId()}"></span>
+                            <p> Used Ingredient Amount: <span th:text="${usedIngredients.getAmount()}"></span>  
+                            <p> Used Ingredient Unit: <span th:text="${usedIngredients.getUnit()}"></span> 
+                            <p> Used Ingredient Aisle: <span th:text="${usedIngredients.getAisle()}"></span>  -->
+                            <tr> Used ingredients: <span th:text="${usedIngredients.getName()}"></span> </tr>
+                            <!-- <p><img th:src="@{${usedIngredients.getImageUrl()}}" width="200" height="200 "></p> -->
+                    </div>
+                    <br>
+                    <div th:each = "missedIngredients:${recipe.getMissedIngredientsList()}">
+                        <!-- <p> Missed Ingredient ID: <span th:text="${missedIngredients.getId()}"></span> -->
+                        <p>Missing Ingredients: <span th:text="${missedIngredients.getAmount()}" > </span> <span th:text="${missedIngredients.getUnit()}" > <span th:text="${missedIngredients.getName()}" ></span></span> <span th:text="${missedIngredients.getName()}" ></span></p>
+                        <!-- <p> Missed Ingredient Amount: <span th:text="${missedIngredients.getAmount()}"></span>   -->
+                        <!-- <p> Missed Ingredient Unit: <span th:text="${missedIngredients.getUnit()}"></span> 
+                        <p> Missed Ingredient Aisle: <span th:text="${missedIngredients.getAisle()}"></span> 
+                        <p> Missed Ingredient Name: <span th:text="${missedIngredients.getName()}"></span>  -->
+                        <!-- <p><img th:src="@{${missedIngredients.getImageUrl()}}" width="200" height="200 "></p> -->
+                    </div>
+                    <br>
+                    <!-- <p>usedIngredients: <span th:text="${recipe.getUsedIngredientsList()}"></span></p> -->
+                    <!-- <input type="checkbox" name="recipe" th:checked="${toSave}"/><label for="article">Save</label> -->
+                    <!-- <input type="hidden" th:field="${recipe.getId()}" /> -->
+                    <!-- <input type="submit" name="recipe${recipeList.index}" value="View this recipe"/>   -->
+                    <button type="submit">View this recipe</button>     
+
+                <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+
                     <div class="col-lg-6 menu-item filter-starters">
-                      <img th:src="@{${recipe.getImageUrl()}}" class="menu-img" alt="">
+                      <img src="@{${recipe.getImageUrl()}}" class="menu-img" alt="">
                       <div class="menu-content">
-                        <a href="#"></a><span th:text ="${recipe.getTitle()}"></span>
-                        <input type="hidden" name="id" th:value="${recipe.id}">
+                        <a href="#">{</a><span th:text ="${recipe.getTitle()}"></span>
                       </div>
                       <div class="menu-ingredients">
                         Used Ingredients: <span th:text="${recipe.getUsedIngredientCount()}"></span>
@@ -88,13 +122,7 @@
                         </div>
                         <br>
                         <div th:each = "missedIngredients:${recipe.getMissedIngredientsList()}">
-                            <!-- <p> Missed Ingredient ID: <span th:text="${missedIngredients.getId()}"></span> -->
-                            <tr>Missing Ingredients: <span th:text="${missedIngredients.getAmount()}" > </span> <span th:text="${missedIngredients.getUnit()}" > <span th:text="${missedIngredients.getName()}" ></span></span> <span th:text="${missedIngredients.getName()}" ></span></p>
-                            <!-- <p> Missed Ingredient Amount: <span th:text="${missedIngredients.getAmount()}"></span>   -->
-                            <!-- <p> Missed Ingredient Unit: <span th:text="${missedIngredients.getUnit()}"></span> 
-                            <p> Missed Ingredient Aisle: <span th:text="${missedIngredients.getAisle()}"></span> 
-                            <p> Missed Ingredient Name: <span th:text="${missedIngredients.getName()}"></span>  -->
-                            <!-- <p><img th:src="@{${missedIngredients.getImageUrl()}}" width="200" height="200 "></p> -->
+                            <p>Missing Ingredients: <span th:text="${missedIngredients.getAmount()}" > </span> <span th:text="${missedIngredients.getUnit()}" > <span th:text="${missedIngredients.getName()}" ></span></span> <span th:text="${missedIngredients.getName()}" ></span></p>
                         </div>
                         <br>
                         <button type="submit">View this recipe</button>    

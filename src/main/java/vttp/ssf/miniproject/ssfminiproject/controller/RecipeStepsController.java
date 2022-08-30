@@ -30,26 +30,32 @@ public class RecipeStepsController {
     RecipeService recipeSvc;
 
     @GetMapping("/recipes/instructions" )
-    public String getRecipeById(@RequestParam Integer idx, Model model) {
+    public String getRecipeById(@RequestParam Integer id, Model model) {
     // public String getRecipeById(@ModelAttribute Recipe recipe, Model model) {        
-        System.out.println("IDX: " + idx);
+        System.out.println("IDX: " + id);
         // System.out.println("BROBROBRO " + recipe.getId());
         Recipe recipe = new Recipe();
-        System.out.println("another one )))))))))))) " + recipe.getId() );
-        recipe.setId((idx));
+        System.out.println("Id Test )))))))))))) " + recipe.getId() );
+        recipe.setId((id));
         RecipeInstructions recipeInstructions = new RecipeInstructions();
-        stepsList(model, recipe);
-        recipeSvc.getRecipeInstructions(recipe);
-        model.addAttribute("recipe", recipe);
+        Steps steps = new Steps();
+        stepsList(model, recipe); //it prints here and then dies.
+        logger.info("stepNUMBER )))))))))) " + steps.getNumber()); 
+        logger.info("stepITSELF ))))))))))))) " +steps.getStep()); // Why are these two empty???
+        //the two loggers are returning empty
         model.addAttribute("recipeInstructions", recipeInstructions);
+        model.addAttribute("lsOfSteps", recipeInstructions.getLsOfSteps());
+        model.addAttribute("steps", steps);
+        // model.addAttribute("stepNumber", steps.getNumber());
+        // model.addAttribute("step", steps.getStep());
         return "recipeSteps";
     }
 
     public void stepsList(Model model, Recipe recipe) {
-        ArrayList<RecipeInstructions> recipeSteps = recipeSvc.getRecipeInstructions(recipe);
-        model.addAttribute("recipeSteps", recipeSteps);
+        ArrayList<RecipeInstructions> lsOfRecipeInstructions = recipeSvc.getRecipeInstructions(recipe);
+        model.addAttribute("lsOfRecipeInstructions", lsOfRecipeInstructions);
     }
 
     //SO  when a getampping is used, it sends all the ids across. When post mapping is used, only the first one is sent.
-
+    //I think with the loop rn im missing the create
 }
