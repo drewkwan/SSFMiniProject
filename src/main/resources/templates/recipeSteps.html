@@ -7,16 +7,15 @@
     <title>Recipe Instructions</title>
 </head>
 <body>
-    <div th:each="recipeInstructions:${lsOfRecipeInstructions}"></div>
+    <h1>Here are your instructions</h1>
+    <div th:each="recipeInstructions:${lsOfRecipeInstructions}">
         
-        <h1>here are your instructions</h1>
-        <div th:each="steps:${recipeInstructions.getLsOfSteps()}"></div>
-            <table>
-                <tr>Here are your Steps</tr>
-                <br>   
-                <tr>Element Name: <span th:text="${recipeInstructions.getName()}"></span></tr>
+        
+        <div th:each="steps:${recipeInstructions.getLsOfSteps()}">
+            <table>  
+                <!-- <tr>Element Name: <span th:text="${recipeInstructions.getName()}"></span></tr> -->
                 <br>
-                <tr>Element #<span th:text="${steps.getNumber()}"></span><br><span th:text =${steps.getStep()}></span></tr>
+                <tr>Step #<span th:text="${steps.getNumber()}"> </span><br><span th:text =${steps.getStep()}></span></tr>
                 
             </table>
         </div>

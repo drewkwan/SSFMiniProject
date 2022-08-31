@@ -69,10 +69,14 @@ public class IndexPageController {
         logger.info("ingredients ---> " + recipe.getIngredients());
         logger.info("recipe number ---> " + recipe.getRecipeNumber());
         recipeList(model, recipe);
-        model.addAttribute("recipe", recipe);
-        model.addAttribute("ingredients", recipe.getIngredients());
-        model.addAttribute("number", recipe.getRecipeNumber());
+        // model.addAttribute("recipe", recipe);
+
+
+        //Hmm the bottom three were redundant
+        // model.addAttribute("ingredients", recipe.getIngredients());
+        // model.addAttribute("number", recipe.getRecipeNumber());
         // model.addAttribute("recipeList", recipe); 
+
         return "showRecipes";
         //return "showRecipes";
     }

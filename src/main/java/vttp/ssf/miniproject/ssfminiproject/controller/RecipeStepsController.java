@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import vttp.ssf.miniproject.ssfminiproject.model.Recipe;
 import vttp.ssf.miniproject.ssfminiproject.model.RecipeInstructions;
 import vttp.ssf.miniproject.ssfminiproject.model.Steps;
@@ -37,15 +38,15 @@ public class RecipeStepsController {
         Recipe recipe = new Recipe();
         System.out.println("Id Test )))))))))))) " + recipe.getId() );
         recipe.setId((id));
-        RecipeInstructions recipeInstructions = new RecipeInstructions();
-        Steps steps = new Steps();
         stepsList(model, recipe); //it prints here and then dies.
-        logger.info("stepNUMBER )))))))))) " + steps.getNumber()); 
-        logger.info("stepITSELF ))))))))))))) " +steps.getStep()); // Why are these two empty???
+        // logger.info("stepNUMBER )))))))))) " + steps.getNumber()); 
+        // logger.info("stepITSELF ))))))))))))) " +steps.getStep()); // Why are these two empty???
         //the two loggers are returning empty
-        model.addAttribute("recipeInstructions", recipeInstructions);
-        model.addAttribute("lsOfSteps", recipeInstructions.getLsOfSteps());
-        model.addAttribute("steps", steps);
+
+
+        // model.addAttribute("recipeInstructions", recipeInstructions);
+        // model.addAttribute("lsOfSteps", recipeInstructions.getLsOfSteps());
+        // model.addAttribute("steps", steps);
         // model.addAttribute("stepNumber", steps.getNumber());
         // model.addAttribute("step", steps.getStep());
         return "recipeSteps";
@@ -53,6 +54,7 @@ public class RecipeStepsController {
 
     public void stepsList(Model model, Recipe recipe) {
         ArrayList<RecipeInstructions> lsOfRecipeInstructions = recipeSvc.getRecipeInstructions(recipe);
+        System.out.println("LSSOFFFRECIPINSTNURN89898998 .>>>>>>>>> " + lsOfRecipeInstructions.get(0).getLsOfSteps().get(0).getNumber());
         model.addAttribute("lsOfRecipeInstructions", lsOfRecipeInstructions);
     }
 

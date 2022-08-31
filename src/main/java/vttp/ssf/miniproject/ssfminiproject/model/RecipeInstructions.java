@@ -52,7 +52,7 @@ public class RecipeInstructions {
                 ArrayList<Steps> lsOfSteps = new ArrayList<>();
                 for (JsonValue stepsValue:jsonAllSteps) {
                     JsonObject stepsObj = stepsValue.asJsonObject();
-                    Steps steps = Steps.createSteps(stepsObj);
+                    Steps steps = Steps.createSteps(stepsObj); //create steps method sets the step number and step name
                     lsOfSteps.add(steps);
                     recipeInstructions.setLsOfSteps(lsOfSteps);
                 }
