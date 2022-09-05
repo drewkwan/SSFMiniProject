@@ -37,11 +37,17 @@ public class Recipe {
     
     private boolean limitLicense;//Whether the recipes should have an open license that allows display with proper attribution. Check in the meaning
     private int ranking; //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
-    private boolean ignorePantry;	//Whether to ignore typical pantry items, such as water, salt, flour, etc.
+    private String ignorePantry ="false";	//Whether to ignore typical pantry items, such as water, salt, flour, etc.
     //consider: creating an ignore pantry
     // private ArrayList<Recipe> listOfRecipes = new ArrayList<>();
     
     
+    public String getIgnorePantry() {
+        return ignorePantry;
+    }
+    public void setIgnorePantry(String ignorePantry) {
+        this.ignorePantry = ignorePantry;
+    }
     //}
     // public ArrayList<Recipe> getListOfRecipes() {
     //     return listOfRecipes;
@@ -85,12 +91,6 @@ public class Recipe {
     }
     public void setRanking(int ranking) {
         this.ranking = ranking;
-    }
-    public boolean isIgnorePantry() {
-        return ignorePantry;
-    }
-    public void setIgnorePantry(boolean ignorePantry) {
-        this.ignorePantry = ignorePantry;
     }
 
     // public MissedIngredients getMissedIngredients() {

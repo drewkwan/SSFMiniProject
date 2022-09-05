@@ -1,14 +1,17 @@
 package vttp.ssf.miniproject.ssfminiproject.model;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class User {
 
     private String username;
     private String id;
+    private String password;
+    private ArrayList<Recipe> lsOfRecipesRepo= new ArrayList<>();
 
     public User() {
-        this.id =generateId(8);
+        this.id = generateId(8);
     }
 
     public User(String username) {

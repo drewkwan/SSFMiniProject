@@ -4,10 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Instructions</title>
+    <title>Preparation</title>
 </head>
 <body>
-    <h1>Here are your instructions</h1>
+    <h1 th:text="${recipe.getTitle()}"></h1>
+    <h2>Ingredients</h2>
+
+    <!-- =====PREPARATION===== -->
+    <h2>Preparation</h2>
+    <!-- <h2>You will need: </h2> -->
+        <!-- <div th:each = "usedIngredients:${recipe.getUsedIngredientsList()}">
+            <p><span th:text="${usedIngredients.getAmount()}"></span><span th:text="${usedIngredients.getAmount()}"></span> of <span th:text="${usedIngredients.getName()}"></span> </p>
+        </div>
+        <div th:each="missedIngredients:${recipe.getMissedIngredientsList()}">
+            <p><span th:text="${missedIngredients.getAmount()}"></span><span th:text="${missedIngredients.getUnit()}"></span> of <span th:text="${missedIngredients.getName()}" ></span></p>
+        </div> -->
+
     <div th:each="recipeInstructions:${lsOfRecipeInstructions}">
         
         

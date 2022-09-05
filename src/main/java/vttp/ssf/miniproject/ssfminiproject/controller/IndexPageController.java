@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import vttp.ssf.miniproject.ssfminiproject.model.Recipe;
+import vttp.ssf.miniproject.ssfminiproject.model.RecipeInstructions;
 import vttp.ssf.miniproject.ssfminiproject.service.RecipeService;
 
 @Controller
@@ -72,7 +73,7 @@ public class IndexPageController {
         // model.addAttribute("recipe", recipe);
 
 
-        //Hmm the bottom three were redundant
+        //Bottom three were redundant
         // model.addAttribute("ingredients", recipe.getIngredients());
         // model.addAttribute("number", recipe.getRecipeNumber());
         // model.addAttribute("recipeList", recipe); 
@@ -90,3 +91,11 @@ public class IndexPageController {
     // }
     
 }
+// pork chops $8;
+//steak 15 
+// fruits 9.50 + 7.50
+// apples 8
+// eggs 3.50 
+// spring onion and cilantro 5 
+// memphis 7.50 
+ 
