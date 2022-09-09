@@ -7,8 +7,16 @@ public class User {
 
     private String username;
     private String id;
-    private String password;
-    private ArrayList<Recipe> lsOfRecipesRepo= new ArrayList<>();
+    // private String password;
+    private ArrayList<Recipe> favourites= new ArrayList<>();
+
+    public ArrayList<Recipe> getFavourites() {
+        return favourites;
+    }
+
+    public void setFavourites(ArrayList<Recipe> favourites) {
+        this.favourites = favourites;
+    }
 
     public User() {
         this.id = generateId(8);
@@ -44,6 +52,14 @@ public class User {
             sb.append(Integer.toHexString(r.nextInt()));
         }
         return sb.toString().substring(0, numchars);
+    }
+
+    public void delFromFavourites() {
+        
+    }
+
+    public void addToFavourites () {
+        
     }
 
 }

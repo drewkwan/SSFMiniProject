@@ -218,7 +218,6 @@ public class Recipe {
 
     }
 
-    //consdier: creating a usedIngredients class and maybe a missedIngredients class also ? Or maybe just set and then add it after?
 
     
 }

@@ -63,6 +63,7 @@
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#Search">Search</a></li>
           <li><a class="nav-link scrollto" href="#favourites">Favourites</a></li>
+          
 
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         </ul>
@@ -83,7 +84,7 @@
             <form
               action="#"
               th:action="@{/search}"
-              th:object="${recipe}"
+              th:object="${user}"
               method="post"
               >
                 <input type="text" placeholder="Enter username">

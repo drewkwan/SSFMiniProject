@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import vttp.ssf.miniproject.ssfminiproject.model.Recipe;
 import vttp.ssf.miniproject.ssfminiproject.model.RecipeInstructions;
+import vttp.ssf.miniproject.ssfminiproject.model.User;
 import vttp.ssf.miniproject.ssfminiproject.service.RecipeService;
 
 @Controller
@@ -25,10 +26,18 @@ public class IndexPageController {
     RecipeService recipeSvc;
 
     private static final Logger logger = LoggerFactory.getLogger(IndexPageController.class);
-    @GetMapping
-    public String getHome(Model model) {
-        Recipe recipe = new Recipe();
-        model.addAttribute("recipe", recipe);
+
+
+    // @PostMapping("/login")
+    // public String login(@RequestParam(required=true) String username, Model model) {
+    //     User user = new User();
+
+    // }
+
+    @GetMapping("/")
+    public String getLogin(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
         return "index";
     }
 
@@ -41,6 +50,7 @@ public class IndexPageController {
     //I should remove this once I'm able to process the login.
 
     @PostMapping("/search")
+    //public String getSearch(@RequestParam(value="username", require=true) String username, Model model) {
     public String getSearch(Model model) {
         Recipe recipe = new Recipe();
         model.addAttribute("recipe", recipe);
@@ -70,8 +80,6 @@ public class IndexPageController {
         logger.info("ingredients ---> " + recipe.getIngredients());
         logger.info("recipe number ---> " + recipe.getRecipeNumber());
         recipeList(model, recipe);
-        // model.addAttribute("recipe", recipe);
-
 
         //Bottom three were redundant
         // model.addAttribute("ingredients", recipe.getIngredients());
@@ -81,21 +89,18 @@ public class IndexPageController {
         return "showRecipes";
         //return "showRecipes";
     }
-    //if theres no more data it will throw error, but if there is empty data, no error is thrown. 
 
-    // @PostMapping("/recipes")
-    // public String savedRecipes(@ModelAttribute Model model) {
-
-    //     return "showRecipes";
-
+    // @GetMapping("recipes/favourites")
+    // public String showFavourites() {
+        //the favourites portion should do a redis ,get value 
+        //user.getLsOfRecipes()
+        //model addAttrivbute(lsOfRecipes, lsofRecipes)
+        //return showRecipes;
+        //so the favourites page should return showRecipes since essentially its the same thing except this time instead of calling the api 
+        //... we're retrieving from our own database
     // }
-    
+
+  
 }
-// pork chops $8;
-//steak 15 
-// fruits 9.50 + 7.50
-// apples 8
-// eggs 3.50 
-// spring onion and cilantro 5 
-// memphis 7.50 
+
  

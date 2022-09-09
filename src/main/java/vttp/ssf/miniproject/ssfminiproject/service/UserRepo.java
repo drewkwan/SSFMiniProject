@@ -1,13 +1,18 @@
 package vttp.ssf.miniproject.ssfminiproject.service;
 
-import vttp.ssf.miniproject.ssfminiproject.model.Recipe;
+import java.util.Optional;
+
 import vttp.ssf.miniproject.ssfminiproject.model.User;
 
 public interface UserRepo {
 
-    public void save(Recipe recipe);
+    public void save(final User user);
 
-    public Recipe findById(int recipeId);
+    public Optional<User> findByUsername(final String username);
+
+    // public int update(final User user);
+
+
 
     
 }

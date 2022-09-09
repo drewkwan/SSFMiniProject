@@ -43,8 +43,7 @@ public class RecipeStepsController {
         // model.addAttribute("stepNumber", steps.getNumber());
         // model.addAttribute("step", steps.getStep());
         model.addAttribute("recipe", recipe);
-        return "recipeSteps";
-        // return "showRecipes";
+        return "recipeStepsDraft";
     }
 
     public void stepsList(Model model, Recipe recipe) {
