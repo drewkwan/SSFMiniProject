@@ -6,7 +6,7 @@ import vttp.ssf.miniproject.ssfminiproject.model.User;
 
 public interface UserRepo {
 
-    public void save(final User user);
+    public void createUser(final String username);
 
     public Optional<User> findByUsername(final String username);
 

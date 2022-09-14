@@ -96,8 +96,8 @@ public class MissedIngredients {
         this.imageUrl = imageUrl;
     }
     public static MissedIngredients createMissedIngredients(JsonObject o) {
+        
         MissedIngredients missedIngredients = new MissedIngredients();
-        //String jsonId = o.getString("id");
         missedIngredients.setId(o.getInt("id"));
         missedIngredients.setAmount(o.getJsonNumber("amount").doubleValue());
         missedIngredients.setUnit(o.getString("unit"));
@@ -107,7 +107,6 @@ public class MissedIngredients {
         missedIngredients.setName(o.getString("name"));
         missedIngredients.setOriginal(o.getString("original"));
         missedIngredients.setOriginalName(o.getString("originalName"));
-        //missedIngredients meta not necessary?
         missedIngredients.setImageUrl(o.getString("image"));
 
 

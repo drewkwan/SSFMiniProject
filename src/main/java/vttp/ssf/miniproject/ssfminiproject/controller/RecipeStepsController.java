@@ -26,24 +26,15 @@ public class RecipeStepsController {
     @GetMapping("/recipes/instructions" )
     public String getRecipeById(@RequestParam Integer id, @RequestParam String recipeTitle, Model model ) {
     // public String getRecipeById(@ModelAttribute Recipe recipe, Model model) {        
+        
         System.out.println("IDX: " + id);
         Recipe recipe = new Recipe();
-        // System.out.println("Id Test )))))))))))) " + recipe.getId() );
         recipe.setId((id));
         recipe.setTitle(recipeTitle);
-        stepsList(model, recipe); //it prints here and then dies.
-        // logger.info("stepNUMBER )))))))))) " + steps.getNumber()); 
-        // logger.info("stepITSELF ))))))))))))) " +steps.getStep()); // Why are these two empty???
-        //the two loggers are returning empty
-
-
-        // model.addAttribute("recipeInstructions", recipeInstructions);
-        // model.addAttribute("lsOfSteps", recipeInstructions.getLsOfSteps());
-        // model.addAttribute("steps", steps);
-        // model.addAttribute("stepNumber", steps.getNumber());
-        // model.addAttribute("step", steps.getStep());
-        model.addAttribute("recipe", recipe);
-        return "recipeStepsDraft";
+        stepsList(model, recipe); //adds the list of steps
+        //can't seem to set the ingredients because list cannot be passed as parameter
+        model.addAttribute("recipe", recipe); //adds the recipe with an Id and title
+        return "recipeSteps";
     }
 
     public void stepsList(Model model, Recipe recipe) {

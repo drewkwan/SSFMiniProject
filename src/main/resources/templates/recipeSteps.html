@@ -11,33 +11,23 @@
     <h2>Ingredients</h2>
 
     <!-- =====PREPARATION===== -->
-    <h2>Preparation</h2>
-    <!-- <h2>You will need: </h2> -->
-        <!-- <div th:each = "usedIngredients:${recipe.getUsedIngredientsList()}">
-            <p><span th:text="${usedIngredients.getAmount()}"></span><span th:text="${usedIngredients.getAmount()}"></span> of <span th:text="${usedIngredients.getName()}"></span> </p>
-        </div>
-        <div th:each="missedIngredients:${recipe.getMissedIngredientsList()}">
-            <p><span th:text="${missedIngredients.getAmount()}"></span><span th:text="${missedIngredients.getUnit()}"></span> of <span th:text="${missedIngredients.getName()}" ></span></p>
-        </div> -->
 
     <div th:each="recipeInstructions:${lsOfRecipeInstructions}">
         
         
         <div th:each="steps:${recipeInstructions.getLsOfSteps()}">
             <table>  
-                <!-- <tr>Element Name: <span th:text="${recipeInstructions.getName()}"></span></tr> -->
                 <br>
-                <tr>Step #<span th:text="${steps.getNumber()}"> </span><br><span th:text =${steps.getStep()}></span></tr>
-                
+                <tr>Step #<span th:text="${steps.getNumber()}"> </span><br><span th:text =${steps.getStep()}></span></tr>      
             </table>
-
-            
         </div>
     </div>
     <br>
     <br>
     <br>
     <button>Save this recipe!</button>
-    <button>Search for more recipes</button>
+    <a href="/search">
+        <button>Search for more recipes</button>
+    </a>
 </body>
 </html>

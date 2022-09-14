@@ -18,7 +18,6 @@ public class UsedIngredients {
     private String name;
     private String original;
     private String originalName;
-    //private String meta;//returns a json array not feeeling it todat
     private String imageUrl; //key-value pair "image"
 
 

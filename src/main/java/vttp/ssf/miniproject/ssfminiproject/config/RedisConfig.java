@@ -15,7 +15,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import vttp.ssf.miniproject.ssfminiproject.model.Recipe;
 import vttp.ssf.miniproject.ssfminiproject.model.User;
 
 @Configuration
@@ -29,8 +28,8 @@ public class RedisConfig {
     @Value("${spring.redis.port}")
     private Optional<Integer> redisPort;
 
-    // @Value("${spring.redis.password")
-    private String redisPassword= System.getenv("REDIS_PASSOWORD");
+    @Value("${spring.redis.password}")
+    private String redisPassword;
 
     @Bean
     @Scope("singleton")
