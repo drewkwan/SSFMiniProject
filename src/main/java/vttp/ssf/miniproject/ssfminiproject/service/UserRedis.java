@@ -1,6 +1,5 @@
 package vttp.ssf.miniproject.ssfminiproject.service;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -19,29 +18,17 @@ public class UserRedis implements UserRepo {
     private static final Logger logger = LoggerFactory.getLogger(UserRedis.class);
 
     @Autowired
-    RedisTemplate<String, User> redisTemplate;
+    RedisTemplate<String, Object> redisTemplate;
 
-
-
-    @Override
-    public void createUser(String username) {
-        User user = new User(username);
-        logger.info("creating user");
-        redisTemplate.opsForValue().set(user.getUsername(), user);
-        logger.info("created user successfully!");
-   
-    }
 
     @Override
     public Optional<User> findByUsername(String username) {
-        logger.info("find user by username>  " + username);
+        logger.info("finding user by username....." + username);
 
         try{
-        User result = (User) redisTemplate.opsForValue().get(username);//kills it
-        logger.info(result.toString());
-        logger.info("user found ?>>>>>>>>>>>> " + result );
-        return Optional.of(result);
-        
+            User result = (User) redisTemplate.opsForValue().get(username);//kills it
+            logger.info("user found >>>>>>>>>>>> " + result );
+            return Optional.of(result);
         } catch (Exception e) {
             logger.error(e.getMessage());
             e.printStackTrace();
@@ -49,35 +36,6 @@ public class UserRedis implements UserRepo {
         return Optional.empty();
     }
     
-    public void login(String username) {
-
-        Optional<User> optUser = findByUsername(username); 
-        //Creates new user if empty
-         if (optUser.isEmpty()) {
-            createUser(username);
-            //sets here
-            this.currUser = (User) redisTemplate.opsForValue().get(username);//kills it too
-            System.out.println(redisTemplate.opsForValue().get(username));
-            logger.info("new user created");
-            this.currUser.setLoggedIn(true);
-         } else {
-            this.currUser = (User) redisTemplate.opsForValue().get(username);
-            logger.info("existing user logged in");
-            this.currUser.setLoggedIn(true);
-        }
-
-
-    } 
-
-    public void logout(String username) {
-
-        Optional<User> optUser = findByUsername(username);
-        if (optUser != null) {
-            this.currUser = optUser.get();
-            this.currUser.setLoggedIn(false);
-        }
-    }
-
     public User getCurrUser() {
             return currUser;
         }
@@ -86,5 +44,14 @@ public class UserRedis implements UserRepo {
     public void setCurrUser(User currUser) {
         this.currUser = currUser;
     }
+
+    @Override
+    public void save(User user) {
+        logger.info("saving.........");
+        redisTemplate.opsForValue().set(user.getUsername(),user);
+        logger.info("saved successfully");
+        
+    }
+
     
 }

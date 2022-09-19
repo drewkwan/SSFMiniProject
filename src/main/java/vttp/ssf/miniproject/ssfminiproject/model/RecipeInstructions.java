@@ -35,12 +35,12 @@ public class RecipeInstructions {
     }
 
     public static ArrayList<RecipeInstructions> createLsOfInstructions(String json) {
-        logger.info("recipe steps Json >>>>>>>> " + json);
+        //logger.info("recipe steps Json >>>>>>>> " + json);
 
         InputStream is = new ByteArrayInputStream(json.getBytes());
         try (JsonReader r = Json.createReader(is)) {
             JsonArray instructionsArray = r.readArray();
-            logger.info("Json stepsData>>>>>> " + instructionsArray);
+            //logger.info("Json stepsData>>>>>> " + instructionsArray);
             ArrayList<RecipeInstructions> lsOfRecipeInstructions = new ArrayList<>();
             for (JsonValue instructionsValue:instructionsArray) {
                 JsonObject instructionsObject = instructionsValue.asJsonObject();

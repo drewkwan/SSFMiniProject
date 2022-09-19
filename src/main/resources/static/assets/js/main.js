@@ -228,7 +228,8 @@
   });
 
   /**
-   * Testimonials slider
+   * 
+   *  slider
    */
   new Swiper('.testimonials-slider', {
     speed: 600,

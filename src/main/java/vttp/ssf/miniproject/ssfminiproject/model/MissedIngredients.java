@@ -18,9 +18,8 @@ public class MissedIngredients {
     private String name;
     private String original;
     private String originalName;
-    //private String meta;//within an array
     private String extendedName; 
-    private String imageUrl; //seen as "image" key-value pair
+    private String imageUrl; 
 
 
     public int getId() {

@@ -12,21 +12,38 @@
 
     <!-- =====PREPARATION===== -->
 
+    <form th:action="@{/add}" th:object="${user}" method="post">
+
+        <input type="hidden" name="recipeTitle" th:value="${recipe.title}">
+        <input type="hidden" name="id" th:value="${recipe.id}">
+        <!-- <input type="hidden" name ="usedRecipeIngredients" th:value="${recipe.getUsedIngredientsList()}">
+        <input type="hidden" name ="missedRecipeIngredients" th:value="${recipe.getMissedIngredientsList()}"> -->
+        <input type="hidden" name="recipeImageUrl" th:value="${recipe.getImageUrl}">
+
+
     <div th:each="recipeInstructions:${lsOfRecipeInstructions}">
         
         
         <div th:each="steps:${recipeInstructions.getLsOfSteps()}">
             <table>  
                 <br>
-                <tr>Step #<span th:text="${steps.getNumber()}"> </span><br><span th:text =${steps.getStep()}></span></tr>      
+                <tr>Step #<span th:text="${steps.getNumber()}"> </span><br><span th:text =${steps.getStep()}></span></tr>
+                    
             </table>
         </div>
     </div>
     <br>
     <br>
     <br>
-    <button>Save this recipe!</button>
-    <a href="/search">
+        <button type="submit" class="btn btn-link" align="center" value="submit">Add to Favourites</button>
+      </form> 
+      <form th:action="@{/delete}" th:object="${user}" method="post">
+        <input type="hidden" name="recipeTitle" th:value="${recipe.title}">
+        <input type="hidden" name="id" th:value="${recipe.id}">
+        <input type="hidden" name="recipeImageUrl" th:value="${recipe.getImageUrl}">
+        <button type="submit" class="btn btn-link" align="center" value="submit">Delete this Recipe</button>
+      </form>
+      <a href="/search"> 
         <button>Search for more recipes</button>
     </a>
 </body>

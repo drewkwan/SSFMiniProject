@@ -5,19 +5,20 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import vttp.ssf.miniproject.ssfminiproject.model.User;
 
 @Configuration
+@EnableCaching
 public class RedisConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(RedisConfig.class);
@@ -32,22 +33,40 @@ public class RedisConfig {
     private String redisPassword;
 
     @Bean
-    @Scope("singleton")
-    public RedisTemplate<String, User> redisTemplate() {
-        final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
-        config.setHostName(redisHost);
-        config.setPort(redisPort.get());
-        config.setPassword(redisPassword);
+    public JedisConnectionFactory jedisConenctionFactory() {
+        RedisStandaloneConfiguration config = loadConfig();
 
+        final JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(config);
         final JedisClientConfiguration jedisClient = JedisClientConfiguration.builder().build();
-        final JedisConnectionFactory jedisFac = new JedisConnectionFactory(config, jedisClient);
-        jedisFac.afterPropertiesSet();
+
+        jedisConnectionFactory.afterPropertiesSet();
+        return jedisConnectionFactory;
+    }
+
+    @Bean 
+    public RedisStandaloneConfiguration loadConfig() {
+        final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
+        config.setHostName(this.redisHost);
+        config.setPassword(this.redisPassword);
+        config.setPort(redisPort.get());
         logger.info("redis host port > {redisHost} {redisPort}", redisHost, redisPort);
-        RedisTemplate<String, User> template = new RedisTemplate<String, User>();
-        template.setConnectionFactory(jedisFac);
+        return config;
+    }
+
+    @Bean
+    public RedisTemplate<String, Object> redisTemplate() {
+
+        final RedisTemplate<String, Object> template = new RedisTemplate<>();
+        template.setConnectionFactory(jedisConenctionFactory()); 
         template.setKeySerializer(new StringRedisSerializer());
-        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
-        template.setValueSerializer(jackson2JsonRedisSerializer);
+        template.setHashKeySerializer(new StringRedisSerializer());
+        template.setHashKeySerializer(new JdkSerializationRedisSerializer(getClass().getClassLoader()));
+        template.setValueSerializer(new JdkSerializationRedisSerializer(getClass().getClassLoader()));
+
+        RedisSerializer<Object> serializer = new JdkSerializationRedisSerializer(getClass().getClassLoader());
+        template.setDefaultSerializer(serializer);
+        template.setEnableTransactionSupport(true);
+        template.afterPropertiesSet();
         return template;
 
 

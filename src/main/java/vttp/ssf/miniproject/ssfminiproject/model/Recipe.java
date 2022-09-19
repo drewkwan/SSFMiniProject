@@ -2,6 +2,7 @@ package vttp.ssf.miniproject.ssfminiproject.model;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.slf4j.Logger;
@@ -14,7 +15,7 @@ import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 import jakarta.json.JsonValue;
 
-public class Recipe {
+public class Recipe implements Serializable {
 
     private static final Logger logger = LoggerFactory.getLogger(Recipe.class);
     //parameters
@@ -166,7 +167,7 @@ public class Recipe {
         InputStream is = new ByteArrayInputStream(json.getBytes());
         try(JsonReader r = Json.createReader(is)) {
             JsonArray dataArray = r.readArray();
-            logger.info("Json data >>>>>>" + dataArray);
+            //logger.info("Json data >>>>>>" + dataArray);
             ArrayList<Recipe> recipeList =new ArrayList<>();
             for (JsonValue dataValue:dataArray) {
                 JsonObject o = dataValue.asJsonObject();
