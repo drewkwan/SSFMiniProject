@@ -20,8 +20,7 @@ public class RecipeService {
     public static final String RECIPE_LS_URL = "https://api.spoonacular.com/recipes/findByIngredients"; //spoonacular api
     
     public ArrayList<Recipe> getRecipes(Recipe recipe) {
-        String apiKey = "70bb981363e4453aa65e92b0750ab864";
-        // String apiKey = System.getenv("FIXER_CURRENCY_API_KEY");
+        String apiKey = System.getenv("SPOONACULAR_API_KEY");
         String recipeListUrl = UriComponentsBuilder.fromUriString(RECIPE_LS_URL)
                              .queryParam("ignorePantry", recipe.getIgnorePantry())
                              .queryParam("ingredients", recipe.getIngredients())
@@ -38,7 +37,7 @@ public class RecipeService {
     }
 
     public ArrayList<RecipeInstructions> getRecipeInstructions(Recipe recipe) {
-        String apiKey = "70bb981363e4453aa65e92b0750ab864";
+        String apiKey = System.getenv("SPOONACULAR_API_KEY");
         String RECIPE_INSTRUCTIONS_URI = "https://api.spoonacular.com/recipes/" + recipe.getId() + "/analyzedInstructions";
         System.out.println("test");
         logger.info("test ::::::::::: " + recipe.getId());
