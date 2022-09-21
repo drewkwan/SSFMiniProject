@@ -36,7 +36,7 @@
   ======================================================== -->
 </head>
 <!--Top Bar portion-->
-<body>
+  <body>
     <div id="topbar" class="d-flex align-items-center fixed-top">
         <div class="container d-flex justify-content-center justify-content-md-between">
     
@@ -67,7 +67,7 @@
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->
-    <a href="/" class="book-a-table-btn scrollto d-none d-lg-flex">Logout</a>
+    <a href="/" class="book-a-table-btn scrollto d-none d-lg-flex">Home</a>
 
   </div>
 </header><!-- End Header -->
@@ -83,12 +83,12 @@
           <br>
           <br>
           <br>
-            <h1>Here are your Favourites!</h1>
-            <h2>Search results</h2>
+            <h1>Here are your Favourites, <span th:text=${user.getUsername()}></span>!</h1>
             <p>Check Out These Recipes!</p>
         </div>
         <!-- <span th:text="${user.getUsername()}"></span> -->
-            <div th:each = "recipe:${lsOfFavourites}">  
+        
+          <div th:each = "recipe:${lsOfFavourites}">  
 
             <form 
             action="#"
@@ -96,14 +96,14 @@
             th:object="${recipe}"
             method="post"
             >
-                    <div class="col-lg-6 menu-item filter-starters">
-                      <img th:src="@{${recipe.getImageUrl()}}" class="menu-img" alt="">
-                      <div class="menu-content">
-                        <a href="#"></a><span th:text ="${recipe.getTitle()}"></span>
-                        <input type="hidden" name="recipeTitle" th:value="${recipe.title}">
-                        <input type="hidden" name="id" th:value="${recipe.id}">
-                        <input type="hidden" name="recipeImageUrl" th:value="${recipe.getImageUrl}">
-                      </div>
+              <div class="col-lg-6 menu-item filter-starters">
+                <img th:src="@{${recipe.getImageUrl()}}" class="menu-img" alt="">
+                    <div class="menu-content">
+                      <a href="#"></a><span th:text ="${recipe.getTitle()}"></span>
+                      <input type="hidden" name="recipeTitle" th:value="${recipe.title}">
+                      <input type="hidden" name="id" th:value="${recipe.id}">
+                      <input type="hidden" name="recipeImageUrl" th:value="${recipe.getImageUrl}">
+                    </div>
                       
                       <!-- <div class="menu-ingredients">
                         You will Need:
@@ -125,9 +125,9 @@
                         <!-- </div>
                         <br> -->
                         <button type="submit">View this recipe</button>    
-                        </div>
-                        </div>
+                      <!-- </div> -->
+              </div>
             </form>
-        </div>
-    </body>
+          </div>
+  </body>
 </html>

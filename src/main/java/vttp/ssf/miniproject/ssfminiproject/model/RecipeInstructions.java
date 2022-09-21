@@ -35,12 +35,10 @@ public class RecipeInstructions {
     }
 
     public static ArrayList<RecipeInstructions> createLsOfInstructions(String json) {
-        //logger.info("recipe steps Json >>>>>>>> " + json);
 
         InputStream is = new ByteArrayInputStream(json.getBytes());
         try (JsonReader r = Json.createReader(is)) {
             JsonArray instructionsArray = r.readArray();
-            //logger.info("Json stepsData>>>>>> " + instructionsArray);
             ArrayList<RecipeInstructions> lsOfRecipeInstructions = new ArrayList<>();
             for (JsonValue instructionsValue:instructionsArray) {
                 JsonObject instructionsObject = instructionsValue.asJsonObject();
@@ -52,7 +50,7 @@ public class RecipeInstructions {
                 ArrayList<Steps> lsOfSteps = new ArrayList<>();
                 for (JsonValue stepsValue:jsonAllSteps) {
                     JsonObject stepsObj = stepsValue.asJsonObject();
-                    Steps steps = Steps.createSteps(stepsObj); //create steps method sets the step number and step name
+                    Steps steps = Steps.createSteps(stepsObj);
                     lsOfSteps.add(steps);
                     recipeInstructions.setLsOfSteps(lsOfSteps);
                 }

@@ -1,0 +1,36 @@
+body{
+    background-image: url('https://c.tenor.com/p98d_YNK3K8AAAAC/gordon-ramsay-idiot-sandwich.gif');
+    background-size: cover;
+    background-color: bisque;
+    
+    
+    
+    height: 100vh;
+    padding-bottom: 50px;
+    margin:0;
+}
+
+h1 {
+    color: azure;
+    padding-left: 80px;
+    padding-top: 100px;
+}
+
+h2 {
+    color: aliceblue;
+    padding-left: 80px;
+}
+
+.box {
+    background-color: azure;
+    background-size: cover;
+    opacity: 0.6;
+    border: 3px solid;
+    padding: 10px;
+    padding-top: 10px;
+    align-content: left;
+    text-align: left;
+    text-size-adjust: 10px;
+    top: 80px;
+    font-size: x-large;
+}

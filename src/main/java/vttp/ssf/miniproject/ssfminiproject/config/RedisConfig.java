@@ -29,10 +29,11 @@ public class RedisConfig {
     @Value("${spring.redis.port}")
     private Optional<Integer> redisPort;
 
-    String redisPassword = System.getenv("REDIS_API_KEY");
+    @Value("${spring.redis.password}")
+    private String redisPassword;
 
     @Bean
-    public JedisConnectionFactory jedisConenctionFactory() {
+    public JedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration config = loadConfig();
 
         final JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(config);
@@ -56,7 +57,7 @@ public class RedisConfig {
     public RedisTemplate<String, Object> redisTemplate() {
 
         final RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(jedisConenctionFactory()); 
+        template.setConnectionFactory(jedisConnectionFactory()); 
         template.setKeySerializer(new StringRedisSerializer());
         template.setHashKeySerializer(new StringRedisSerializer());
         template.setHashKeySerializer(new JdkSerializationRedisSerializer(getClass().getClassLoader()));

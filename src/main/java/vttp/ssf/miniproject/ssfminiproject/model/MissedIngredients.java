@@ -76,12 +76,7 @@ public class MissedIngredients {
     public void setOriginalName(String originalName) {
         this.originalName = originalName;
     }
-    // public String getMeta() {
-    //     return meta;
-    // }
-    // public void setMeta(String meta) {
-    //     this.meta = meta;
-    // }
+
     public String getExtendedName() {
         return extendedName;
     }

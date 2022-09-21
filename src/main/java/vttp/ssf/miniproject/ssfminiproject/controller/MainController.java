@@ -1,8 +1,6 @@
 package vttp.ssf.miniproject.ssfminiproject.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,8 +35,9 @@ public class MainController {
 
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
+    //==================User Login/Logout Controllers==========================
 
-    //1) Get login page
+
     @GetMapping("/")
     public String home(Model model) {
         if (userServiceImpl.getCurrUserInSession() == null) {
@@ -52,7 +51,7 @@ public class MainController {
         return "index";
     }
 
-    //2) Verify login page
+
     @GetMapping("/login")
     public String showLoginForm(Model model) {
         User user = new User();
@@ -79,7 +78,7 @@ public class MainController {
     @PostMapping("/logout")
     public String submitLogoutForm(@ModelAttribute ("user") User user, Model model) {
         String username = user.getUsername();
-        boolean isUserInDb = userServiceImpl.logout(username);
+        userServiceImpl.logout(username);
         return("redirect:login");
     }
 
@@ -102,7 +101,8 @@ public class MainController {
         return "redirect:";
     }
 
-    //If login passes, redirect to search
+    //=======================RECIPE CONTROLLERS=========================
+
     @GetMapping("/search")
     public String getSearch(@ModelAttribute("user") User user, Model model) {
 
@@ -135,13 +135,16 @@ public class MainController {
     }
 
     //Get the recipe instructions
-    @PostMapping("/recipes/instructions")
-    public String getRecipeById(@RequestParam Integer id, @RequestParam String recipeTitle,
-    @RequestParam String recipeImageUrl, @ModelAttribute("user") User user, @ModelAttribute("recipe") Recipe recipe, Model model) {
+    @PostMapping("/recipes/instructions") //consider doing like just a /viewInstructions or sth
+    public String getRecipeById(
+    @RequestParam Integer id, @RequestParam String recipeTitle, @RequestParam String recipeImageUrl,
+    @ModelAttribute("user") User user, @ModelAttribute("recipe") Recipe recipe, Model model) {
     // public String getRecipeById(@ModelAttribute Recipe recipe, Model model) {        
 
         logger.info("IDX: " + id);
         logger.info("checking for user >>>>>>>>>> " + userServiceImpl.getCurrUserInSession().getUsername());
+        // logger.info("usedIngredients >>>>>>>> " + usedRecipeIngredients.get(0).toString());
+        // System.out.println("antoehr check LLLLLLLLLLL  " + usedRecipeIngredients.get(0).toString());
         recipe.setId((id));
         recipe.setTitle(recipeTitle);
         recipe.setImageUrl(recipeImageUrl);
@@ -159,6 +162,11 @@ public class MainController {
         model.addAttribute("lsOfRecipeInstructions", lsOfRecipeInstructions);
     }
 
+
+    //=======================Favourites Controllers==========================
+
+
+
     @GetMapping("/favourites")
     public String showFavourites(@ModelAttribute("user") User user, Model model) {
     
@@ -170,12 +178,14 @@ public class MainController {
             logger.info("there is nothing to say");
             return "error";
         }
+        model.addAttribute("user", currUser);
         return "favourites";
     }
 
     @PostMapping(path="/add") 
     public String addRecipe(@ModelAttribute("user") User user, @ModelAttribute Recipe recipe, @RequestParam Integer id, @RequestParam String recipeTitle,
     @RequestParam String recipeImageUrl, Model model) {
+
         recipe.setId(id);
         recipe.setTitle(recipeTitle);
         recipe.setImageUrl(recipeImageUrl);

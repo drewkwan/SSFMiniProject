@@ -75,10 +75,10 @@ public class User implements Serializable {
 
     public void delFromFavourites(Recipe recipe, User user) {
 
-        if (user.getFavourites().size()== 0) {
+        if (user.getFavourites().size() == 0) {
             logger.info("no favourites to delete!");
             return;
-        } else{ 
+        } else { 
             for (int i = 0; i< favourites.size(); i++) {
                 if((getFavourites().get(i).getId() == (recipe.getId()))) {
                     logger.info("removing recipe now.......");
@@ -93,20 +93,28 @@ public class User implements Serializable {
 
 
     public void addToFavourites(Recipe recipe, User user) {
-
-        if (user.getFavourites().size() == 0)  {
-            favourites.add(recipe);
-        } else{
-            for(int i = 0; i <= favourites.size(); i++){
-                if((getFavourites().get(i).getId()) == (recipe.getId())) {
-                    logger.info("recipe already exists in favourites");
-                    return;
-                    } else {
-                 favourites.add(recipe);
-                }
+        
+        if (user.getFavourites().isEmpty())  {
+            user.getFavourites().add(recipe);
+            logger.info("recipe has been added successfully!");
+        } else  {
+            boolean isDuplicate = containsDuplicate(user.getFavourites(), recipe);
+            if (!isDuplicate) {
+                user.getFavourites().add(recipe);
+                logger.info("recipe has been added successfully!");
+            } else{
+                logger.info("recipe is already in favourites!");
             }
-        } 
+        }
+    }
 
+    public boolean containsDuplicate(List<Recipe> recipes, Recipe toCheck) {
+        for (Recipe r : recipes) {
+            if (r.getId() == toCheck.getId()) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

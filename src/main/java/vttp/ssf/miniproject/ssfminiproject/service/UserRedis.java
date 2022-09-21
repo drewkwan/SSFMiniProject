@@ -36,19 +36,12 @@ public class UserRedis implements UserRepo {
         return Optional.empty();
     }
     
-    public User getCurrUser() {
-            return currUser;
-        }
 
-    
-    public void setCurrUser(User currUser) {
-        this.currUser = currUser;
-    }
 
     @Override
     public void save(User user) {
         logger.info("saving.........");
-        redisTemplate.opsForValue().set(user.getUsername(),user);
+        redisTemplate.opsForValue().set(user.getUsername(), user);
         logger.info("saved successfully");
         
     }

@@ -18,7 +18,7 @@ public class UsedIngredients {
     private String name;
     private String original;
     private String originalName;
-    private String imageUrl; //key-value pair "image"
+    private String imageUrl;
 
 
     public int getId() {
@@ -75,12 +75,7 @@ public class UsedIngredients {
     public void setOriginalName(String originalName) {
         this.originalName = originalName;
     }
-    // public String getMeta() {
-    //     return meta;
-    // }
-    // public void setMeta(String meta) {
-    //     this.meta = meta;
-    // } this one i a bit lazy
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -89,7 +84,7 @@ public class UsedIngredients {
     }
     public static UsedIngredients createUsedIngredients(JsonObject o) {
         UsedIngredients usedIngredients = new UsedIngredients();
-        //String jsonId = o.getString("id");
+
         usedIngredients.setId(o.getInt("id"));
         usedIngredients.setAmount(o.getJsonNumber("amount").doubleValue());
         usedIngredients.setUnit(o.getString("unit"));
@@ -100,7 +95,6 @@ public class UsedIngredients {
         usedIngredients.setOriginal((o.getString("original")));
         usedIngredients.setOriginalName(o.getString("originalName"));
         usedIngredients.setImageUrl(o.getString("image"));
-
 
         return usedIngredients;
     }

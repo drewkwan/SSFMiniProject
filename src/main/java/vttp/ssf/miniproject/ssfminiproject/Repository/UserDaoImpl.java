@@ -73,7 +73,6 @@ public class UserDaoImpl implements UserDaoInterface{
     public boolean logout(User user) {
         user.setLoggedIn(false);
         hashOperations.put(KEY, user.getUserId(), user);
-        logger.info(user.toString() + " has logged out successfully");
         return false;
     }
     

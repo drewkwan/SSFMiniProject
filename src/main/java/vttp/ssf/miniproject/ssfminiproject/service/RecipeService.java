@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,12 +16,15 @@ import vttp.ssf.miniproject.ssfminiproject.model.RecipeInstructions;
 @Service
 public class RecipeService {
 
+    @Value("${apiKey}")
+    String apiKey; 
+
     private static final Logger logger = LoggerFactory.getLogger(RecipeService.class);
 
-    public static final String RECIPE_LS_URL = "https://api.spoonacular.com/recipes/findByIngredients"; //spoonacular api
+    public static final String RECIPE_LS_URL = "https://api.spoonacular.com/recipes/findByIngredients"; 
     
     public ArrayList<Recipe> getRecipes(Recipe recipe) {
-        String apiKey = System.getenv("SPOONACULAR_API_KEY");
+
         String recipeListUrl = UriComponentsBuilder.fromUriString(RECIPE_LS_URL)
                              .queryParam("ignorePantry", recipe.getIgnorePantry())
                              .queryParam("ingredients", recipe.getIngredients())
@@ -37,7 +41,6 @@ public class RecipeService {
     }
 
     public ArrayList<RecipeInstructions> getRecipeInstructions(Recipe recipe) {
-        String apiKey = System.getenv("SPOONACULAR_API_KEY");
         String RECIPE_INSTRUCTIONS_URI = "https://api.spoonacular.com/recipes/" + recipe.getId() + "/analyzedInstructions";
         System.out.println("test");
         logger.info("test ::::::::::: " + recipe.getId());
