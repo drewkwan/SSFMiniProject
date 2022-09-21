@@ -90,7 +90,7 @@ public class UsedIngredients {
         usedIngredients.setUnit(o.getString("unit"));
         usedIngredients.setUnitLong((o.getString("unitLong")));
         usedIngredients.setUnitShort((o.getString("unitShort")));
-        usedIngredients.setAisle(o.getString("aisle"));
+        // usedIngredients.setAisle(o.getString("aisle"));
         usedIngredients.setName(o.getString("name"));
         usedIngredients.setOriginal((o.getString("original")));
         usedIngredients.setOriginalName(o.getString("originalName"));

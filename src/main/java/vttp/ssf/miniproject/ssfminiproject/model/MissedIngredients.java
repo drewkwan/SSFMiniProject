@@ -95,7 +95,7 @@ public class MissedIngredients {
         missedIngredients.setId(o.getInt("id"));
         missedIngredients.setAmount(o.getJsonNumber("amount").doubleValue());
         missedIngredients.setUnit(o.getString("unit"));
-        missedIngredients.setAisle(o.getString("aisle"));
+        // missedIngredients.setAisle(o.getString("aisle"));
         missedIngredients.setUnitLong(o.getString("unitLong"));
         missedIngredients.setUnitShort(o.getString("unitShort"));
         missedIngredients.setName(o.getString("name"));

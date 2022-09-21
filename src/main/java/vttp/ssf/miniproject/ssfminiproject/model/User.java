@@ -20,6 +20,7 @@ public class User implements Serializable {
     private List<Recipe> favourites= new ArrayList<>(); 
     private int userId;
     
+    
     @Autowired
     UserServiceImpl userServiceImpl;
 
