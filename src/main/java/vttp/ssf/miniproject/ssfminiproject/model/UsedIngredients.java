@@ -1,13 +1,9 @@
 package vttp.ssf.miniproject.ssfminiproject.model;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import jakarta.json.JsonObject;
 
 public class UsedIngredients {
     
-    private static final Logger logger = LoggerFactory.getLogger(UsedIngredients.class);
     
     private int id;
     private double amount;

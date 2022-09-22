@@ -142,14 +142,11 @@ public class Recipe implements Serializable {
             JsonArray dataArray = r.readArray();
             logger.info("Json data >>>>>>" + dataArray);
             ArrayList<Recipe> recipeList =new ArrayList<>();
-            //add if condition(?)
-            //if dataArray hasNext
             for (JsonValue dataValue:dataArray) {
                 if (dataValue!=null) {
                     JsonObject o = dataValue.asJsonObject();
                     
                     System.out.println("recipe ID>>>>>>>>> " + o.getInt("id"));
-                    //Instantiate the new recipe class inside the loop so that you create a new recipe everytime
                     Recipe recipe = new Recipe();
                     recipe.setTitle(o.getString("title"));
                     recipe.setId(o.getInt("id"));
@@ -179,7 +176,7 @@ public class Recipe implements Serializable {
 
 
                     recipeList.add(recipe);
-                    logger.info("the recipe list !!>>> " + recipeList.size());
+                    logger.info("the recipe list >>>>> " + recipeList.size());
                     logger.info(recipe.getTitle().toString());
                 } else {
                     return null;

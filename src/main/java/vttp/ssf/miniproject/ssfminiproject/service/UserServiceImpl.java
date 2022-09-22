@@ -1,7 +1,5 @@
 package vttp.ssf.miniproject.ssfminiproject.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +14,7 @@ public class UserServiceImpl implements UserServiceInterface {
     @Autowired
     private UserDaoImpl userDaoImpl;
 
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    // private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private User currUserInSession;
 

@@ -11,11 +11,10 @@ import org.springframework.stereotype.Service;
 import vttp.ssf.miniproject.ssfminiproject.model.User;
 
 @Service
-public class UserRedis implements UserRepo {
+public class UserRedisService implements UserRepoInterface {
 
-    private User currUser;
 
-    private static final Logger logger = LoggerFactory.getLogger(UserRedis.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserRedisService.class);
 
     @Autowired
     RedisTemplate<String, Object> redisTemplate;

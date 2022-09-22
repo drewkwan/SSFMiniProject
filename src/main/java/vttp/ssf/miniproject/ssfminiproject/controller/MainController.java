@@ -15,10 +15,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vttp.ssf.miniproject.ssfminiproject.model.Recipe;
 import vttp.ssf.miniproject.ssfminiproject.model.RecipeInstructions;
-import vttp.ssf.miniproject.ssfminiproject.model.UsedIngredients;
 import vttp.ssf.miniproject.ssfminiproject.model.User;
 import vttp.ssf.miniproject.ssfminiproject.service.RecipeService;
-import vttp.ssf.miniproject.ssfminiproject.service.UserRedis;
+import vttp.ssf.miniproject.ssfminiproject.service.UserRedisService;
 import vttp.ssf.miniproject.ssfminiproject.service.UserServiceImpl;
 
 @Controller
@@ -28,15 +27,15 @@ public class MainController {
     RecipeService recipeSvc;
 
     @Autowired
-    private UserRedis userRedisService;
+    private UserRedisService userRedisService;
 
     @Autowired
     UserServiceImpl userServiceImpl;
 
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
-    
-    //==================User Login/Logout Controllers==========================
+
+    //==================User Login/Logout Controllers==========================//
 
 
     @GetMapping("/")
@@ -57,7 +56,6 @@ public class MainController {
     public String showLoginForm(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        // logger.info("checking user >>>>>>" + userServiceImpl.getCurrUserInSession().getUsername());
         return "login";
     }
 
@@ -65,7 +63,7 @@ public class MainController {
     @PostMapping("/login")
     public String submtiLogin(@ModelAttribute("user") User user, Model model, RedirectAttributes redirectAttributes) {
         String username = user.getUsername();
-        // userRedisService.save(user);
+        userRedisService.save(user);
         boolean isLoggedIn = userServiceImpl.login(username);
         model.addAttribute(user);
         if(!isLoggedIn) {
@@ -95,6 +93,7 @@ public class MainController {
         String username = user.getUsername();
         boolean isCreated = userServiceImpl.create(username);
         if (isCreated) {
+            userRedisService.save(user);
             redirectAttributes.addFlashAttribute("success!", "Your account is created successfully! You may log in now.");
         } else {
             redirectAttributes.addFlashAttribute("Error", "this username has been taken already. Please try again.");
@@ -102,7 +101,7 @@ public class MainController {
         return "redirect:";
     }
 
-    //=======================RECIPE CONTROLLERS=========================
+    //=======================RECIPE CONTROLLERS=========================//
 
     @GetMapping("/search")
     public String getSearch(@ModelAttribute("user") User user, Model model) {
@@ -164,7 +163,7 @@ public class MainController {
     }
 
 
-    //=======================Favourites Controllers==========================
+    //=======================Favourites Controllers==========================//
 
 
 
@@ -176,8 +175,7 @@ public class MainController {
         if ((currUser.getFavourites()) != null){
             model.addAttribute("lsOfFavourites", currUser.getFavourites());
         } else {
-            logger.info("there is nothing to say");
-            return "error";
+            logger.info("no favourites available");
         }
         model.addAttribute("user", currUser);
         return "favourites";

@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import vttp.ssf.miniproject.ssfminiproject.model.User;
 
-public interface UserRepo {
+public interface UserRepoInterface {
 
 
     public Optional<User> findByUsername(final String username);

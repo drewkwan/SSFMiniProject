@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import vttp.ssf.miniproject.ssfminiproject.model.User;
-import vttp.ssf.miniproject.ssfminiproject.service.UserRedis;
+import vttp.ssf.miniproject.ssfminiproject.service.UserRedisService;
 
 @RestController
 public class RecipeRestController {
 
     @Autowired
-    UserRedis redisService;
+    UserRedisService redisService;
 
     private static final Logger logger = LoggerFactory.getLogger(RecipeRestController.class);
 
